@@ -1,57 +1,172 @@
-# Rodina Mobile Bot
+# Rodina Mobile Bot — Готовая версия 0.1.0
 
-Первая версия проекта для Android-бота с потоками автоматизации:
-- вход на сервер по IP и паролю;
-- AFK-цикл и повторяющиеся действия;
-- чёрно-синяя тема UI;
-- базовый Accessibility Service для автоматизации экрана Android.
+🤖 **Android-бот для автоматизации входа на сервер и AFK-фарма**
 
-Статус проекта
-- Базовая структура Android проекта создана.
-- Главный экран готов с визуальным стилем Rodina Mobile Bot.
-- Список профилей серверов и статус запуска добавлены.
-- Подготовлены модели данных для сценариев автоматизации.
-- Добавлен менеджер сценариев и экран редактирования профиля.
+## Быстрый старт
 
-Что уже реализовано
-- Kotlin + Compose
-- Главный экран
-- Профили автоматизации
-- Состояние UI и логов
-- Базовый сервис доступности
-- Базовый сервис AFK-автоматизации
-- Движок сценариев: connect, password, wait, afk loop
-- Экран редактирования профиля
-- README проектной документации
+### 📦 Скачать готовый APK
 
-Основные сценарии MVP
-1. Подключение к серверу по IP и порту
-2. Ввод пароля и подтверждение входа
-3. Ожидание/пауза между действиями
-4. Клики, свайпы и повторные действия для AFK
-5. Логирование запуска и статуса сценария
+1. **Сборка APK:**
+   - **Windows:** запустите `build.bat`
+   - **macOS/Linux:** запустите `./build.sh` или `./gradlew assembleRelease`
 
-Структура проекта
-- app/src/main/java/com/rodina/mobilebot/MainActivity.kt — главный экран, состояние UI и редактор профиля
-- app/src/main/java/com/rodina/mobilebot/data/AutomationProfile.kt — модель профиля сервера
-- app/src/main/java/com/rodina/mobilebot/data/AutomationUiState.kt — состояние UI
-- app/src/main/java/com/rodina/mobilebot/engine/AutomationEngine.kt — сценарный движок автоматизации
-- app/src/main/java/com/rodina/mobilebot/service/RodinaAccessibilityService.kt — доступность и события экрана
-- app/src/main/java/com/rodina/mobilebot/service/AfkAutomationService.kt — сервис автоматизации
-- app/src/main/res/xml/accessibility_service_config.xml — конфигурация Accessibility Service
+2. **Установка на Android-устройство:**
+   ```bash
+   adb install app/build/outputs/apk/release/app-release.apk
+   ```
 
-Как запустить
-1. Откройте проект в Android Studio.
-2. Убедитесь, что установлен Android SDK.
-3. Подключите физическое устройство или эмулятор.
-4. Выполните Run.
+3. **Или вручную:**
+   - Скопируйте APK на устройство
+   - Откройте и нажмите установить
 
-Важно
-- Используйте Accessibility Service только для приложений и сценариев, которыми вы владеете или используете в рамках правил платформы.
-- Не запускайте автоматизацию в чужих приложениях без согласия владельца.
+## ✨ Функции MVP v0.1.0
 
-План следующей итерации
-- добавить сохранение профилей в DataStore/Room;
-- реализовать полный сценарный редактор шагов;
-- добавить таймеры, логи и статусы выполнения;
-- подготовить режим автоподключения и AFK loop.
+### Основное
+- ✅ Управление профилями серверов (IP, порт, пароль)
+- ✅ Редактирование профилей прямо в приложении
+- ✅ Движок сценариев (CONNECT → PASSWORD → WAIT → AFK_LOOP)
+- ✅ Логирование действий в реальном времени
+- ✅ Синяя/чёрная тема оформления
+
+### Технология
+- Kotlin + Jetpack Compose
+- Material3 дизайн
+- Accessibility Service API
+- WorkManager для фоновых задач
+- DataStore для сохранения настроек
+
+## 📋 Требования для сборки
+
+- **Android SDK:** 26+
+- **Java:** 17+
+- **Gradle:** 8.0+
+- **Android Studio:** 2023.1+ (опционально)
+
+## 🚀 Компиляция
+
+### Вариант 1: Через скрипт
+```bash
+# Linux/macOS
+./build.sh
+
+# Windows
+build.bat
+```
+
+### Вариант 2: Через Gradle напрямую
+```bash
+# Debug версия (для тестирования)
+./gradlew assembleDebug
+
+# Release версия (для продакшена)
+./gradlew assembleRelease
+```
+
+### Вариант 3: Через Android Studio
+1. Откройте проект
+2. Build → Build Bundle(s) / APK(s) → Build APK(s)
+3. Выберите вариант сборки
+
+## 📱 Установка на устройство
+
+```bash
+# Убедитесь, что adb установлен и девайс подключен
+adb devices
+
+# Установите APK
+adb install app/build/outputs/apk/release/app-release.apk
+
+# Или запустите приложение
+adb shell am start -n com.rodina.mobilebot/.MainActivity
+```
+
+## 🎮 Использование приложения
+
+### На главном экране:
+1. **Start automation** — запустить выбранный профиль
+2. **Add profile** — добавить новый сервер
+3. **Edit** (на карточке профиля) — редактировать настройки
+
+### При редактировании профиля:
+- **Name** — название профиля
+- **IP address** — IP сервера
+- **Port** — порт подключения
+- **Password** — пароль для входа
+- **Method** — описание типа сценария
+- **Repeat count** — количество повторов
+- **Delay ms** — задержка между действиями
+
+### Логи:
+Показывают статус выполнения сценария в реальном времени.
+
+## 📂 Структура проекта
+
+```
+rodina-mobile-bot/
+├── app/
+│   ├── src/main/
+│   │   ├── java/com/rodina/mobilebot/
+│   │   │   ├── MainActivity.kt              # UI + логика
+│   │   │   ├── data/                        # Модели данных
+│   │   │   ├── engine/                      # Движок сценариев
+│   │   │   ├── service/                     # Android сервисы
+│   │   │   └── ui/                          # Compose UI
+│   │   ├── res/                             # Ресурсы
+│   │   └── AndroidManifest.xml              # Конфигурация
+│   └── build.gradle.kts
+├── build.gradle.kts
+├── settings.gradle.kts
+├── gradle.properties
+├── build.sh                                 # Linux/macOS скрипт
+├── build.bat                                # Windows скрипт
+├── BUILD_GUIDE.md                           # Подробное руководство
+└── README.md
+```
+
+## 🔐 Безопасность
+
+⚠️ **Важно:**
+- Пароли хранятся в памяти приложения (в будущих версиях будет шифрование)
+- Используйте Accessibility Service только для своих приложений
+- Не используйте для несанкционированного доступа
+- Compliance с политикой Google Play требует явных разрешений
+
+## 🛠️ Возможные проблемы при сборке
+
+### Ошибка: `Command 'gradlew' not found`
+**Решение:** Используйте полный путь `./gradlew` (Linux/macOS) или `gradlew.bat` (Windows)
+
+### Ошибка: `ANDROID_SDK_ROOT not set`
+**Решение:** Установите переменную окружения:
+```bash
+export ANDROID_SDK_ROOT=/path/to/android/sdk  # Linux/macOS
+set ANDROID_SDK_ROOT=C:\Android\sdk           # Windows
+```
+
+### Ошибка: `No matching variant`
+**Решение:** Убедитесь что установлены нужные версии SDK (34, 33, 26)
+
+## 🚀 Следующие версии
+
+- [ ] Сохранение профилей в Room Database
+- [ ] Импорт/экспорт конфигураций
+- [ ] Расширенный редактор сценариев
+- [ ] Таймер и автозапуск по расписанию
+- [ ] Уведомления о статусе
+- [ ] Поддержка прокси
+- [ ] Analytics и статистика использования
+
+## 📞 Поддержка
+
+- **GitHub:** https://github.com/MAKS297485/rodina-mobile-bot
+- **Issues:** Сообщайте об ошибках через GitHub Issues
+
+## 📄 Лицензия
+
+Этот проект предоставляется в образовательных целях. Используйте ответственно.
+
+---
+
+**Версия:** 0.1.0  
+**Статус:** MVP (Минимальный жизнеспособный продукт)  
+**Обновлено:** 2026-10-04
