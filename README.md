@@ -11,6 +11,7 @@
 - Главный экран готов с визуальным стилем Rodina Mobile Bot.
 - Список профилей серверов и статус запуска добавлены.
 - Подготовлены модели данных для сценариев автоматизации.
+- Добавлен менеджер сценариев и экран редактирования профиля.
 
 Что уже реализовано
 - Kotlin + Compose
@@ -19,6 +20,8 @@
 - Состояние UI и логов
 - Базовый сервис доступности
 - Базовый сервис AFK-автоматизации
+- Движок сценариев: connect, password, wait, afk loop
+- Экран редактирования профиля
 - README проектной документации
 
 Основные сценарии MVP
@@ -29,9 +32,10 @@
 5. Логирование запуска и статуса сценария
 
 Структура проекта
-- app/src/main/java/com/rodina/mobilebot/MainActivity.kt — главный экран и UI
+- app/src/main/java/com/rodina/mobilebot/MainActivity.kt — главный экран, состояние UI и редактор профиля
 - app/src/main/java/com/rodina/mobilebot/data/AutomationProfile.kt — модель профиля сервера
 - app/src/main/java/com/rodina/mobilebot/data/AutomationUiState.kt — состояние UI
+- app/src/main/java/com/rodina/mobilebot/engine/AutomationEngine.kt — сценарный движок автоматизации
 - app/src/main/java/com/rodina/mobilebot/service/RodinaAccessibilityService.kt — доступность и события экрана
 - app/src/main/java/com/rodina/mobilebot/service/AfkAutomationService.kt — сервис автоматизации
 - app/src/main/res/xml/accessibility_service_config.xml — конфигурация Accessibility Service
@@ -47,8 +51,7 @@
 - Не запускайте автоматизацию в чужих приложениях без согласия владельца.
 
 План следующей итерации
-- добавить редактирование профилей через UI;
 - добавить сохранение профилей в DataStore/Room;
-- реализовать движок сценариев шагов;
-- добавить таймер, логи и статусы выполнения;
+- реализовать полный сценарный редактор шагов;
+- добавить таймеры, логи и статусы выполнения;
 - подготовить режим автоподключения и AFK loop.

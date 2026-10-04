@@ -11,7 +11,8 @@ data class AutomationProfile(
     val method: String = "Connect and auto keep alive",
     val repeatCount: Int = 1,
     val delayMs: Long = 2000L,
-    val enabled: Boolean = true
+    val enabled: Boolean = true,
+    val steps: List<AutomationStep> = emptyList()
 )
 
 enum class AutomationType {
